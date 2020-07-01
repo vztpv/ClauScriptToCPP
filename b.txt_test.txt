@@ -1,0 +1,206 @@
+Main= {
+	$call= {
+id=list_sum_larger_than
+	 } 
+ } 
+Event= {
+	id=list_sum_larger_than
+	$local= {
+sum i
+	 } 
+	$parameter= {
+n name value is_usertype real_dir
+	 } 
+	$assign= {
+		$local.sum
+		 {
+0
+		 } 
+	 } 
+	$assign= {
+		$local.i
+		 {
+0
+		 } 
+	 } 
+	$while= {
+		cond= {
+			$COMP<= {
+				$local.i
+				$size= {
+$parameter.real_dir
+				 } 
+			 } 
+		 } 
+		then= {
+			$assign= {
+				$local.sum
+				 {
+					$add= {
+						$local.sum
+						$get= {
+							$concat_all= {
+$parameter.real_dir / $ it $local.i
+							 } 
+						 } 
+					 } 
+				 } 
+			 } 
+			$assign= {
+				$local.i
+				 {
+					$add= {
+$local.i 1
+					 } 
+				 } 
+			 } 
+		 } 
+	 } 
+	$if= {
+		cond= {
+			$COMP>= {
+$local.sum $parameter.n
+			 } 
+		 } 
+		then= {
+			$return= {
+TRUE
+			 } 
+		 } 
+	 } 
+	$print= {
+		 {
+$parameter.real_dir
+		 } 
+	 } 
+	$return= {
+FALSE
+	 } 
+ } 
+Event= {
+	id=larger_than
+	$parameter= {
+n name value is_usertype real_dir select
+	 } 
+	$if= {
+		cond= {
+			$COMP>= {
+$parameter.value $parameter.n
+			 } 
+		 } 
+		then= {
+			$return= {
+TRUE
+			 } 
+		 } 
+	 } 
+	$return= {
+FALSE
+	 } 
+ } 
+Event= {
+	id=larger_than_300
+	$parameter= {
+name value is_usertype real_dir select
+	 } 
+	$if= {
+		cond= {
+			$COMP>= {
+$parameter.value 300
+			 } 
+		 } 
+		then= {
+			$return= {
+TRUE
+			 } 
+		 } 
+	 } 
+	$return= {
+FALSE
+	 } 
+ } 
+Event= {
+	id=int_string
+	$parameter= {
+name value input is_usertype real_dir
+	 } 
+	$if= {
+		cond= {
+			$EQ= {
+				INTEGER
+				$get_type= {
+					$remove_quoted= {
+$parameter.input
+					 } 
+				 } 
+			 } 
+		 } 
+		then= {
+			$return= {
+TRUE
+			 } 
+		 } 
+	 } 
+	$return= {
+FALSE
+	 } 
+ } 
+Event= {
+	id=float_string
+	$parameter= {
+name value input is_usertype real_dir
+	 } 
+	$if= {
+		cond= {
+			$EQ= {
+				FLOAT
+				$get_type= {
+					$remove_quoted= {
+$parameter.input
+					 } 
+				 } 
+			 } 
+		 } 
+		then= {
+			$return= {
+TRUE
+			 } 
+		 } 
+	 } 
+	$return= {
+FALSE
+	 } 
+ } 
+Event= {
+	id=int
+	$parameter= {
+name value input is_usertype real_dir
+	 } 
+	$if= {
+		cond= {
+			$EQ= {
+				INTEGER
+				$get_type= {
+$parameter.input
+				 } 
+			 } 
+		 } 
+		then= {
+			$return= {
+TRUE
+			 } 
+		 } 
+	 } 
+	$return= {
+FALSE
+	 } 
+ } 
+Event= {
+	id=false
+	$parameter= {
+name value input is_usertype real_dir
+	 } 
+	$return= {
+FALSE
+	 } 
+ } 
